@@ -38,13 +38,12 @@ function FirstPage() {
             <div className="w-full min-h-screen flex items-center justify-center flex-col bg-white">
                 {/* Mobile Screen Container */}
                 <div
-                    className="w-full max-w-md mx-auto flex flex-col rounded-xl shadow-lg p-2 overflow-auto"
+                    className="w-[393px] h-[852px] overflow-hidden flex flex-col relative rounded-xl shadow-lg"
                     style={{
-                        minHeight: "100vh",
-                        backgroundImage: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/assets/bg.png')",
-                        backgroundBlendMode: "multiply",
+                        backgroundImage: "url('/assets/bg.png')",
                         backgroundSize: "cover",
-                        backgroundPosition: "center"
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
                     }}
                 >
                     {/* Top Half */}

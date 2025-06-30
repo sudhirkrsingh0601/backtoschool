@@ -1,16 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const GamePage: React.FC = () => {
-  const [filledBlanks, setFilledBlanks] = useState<string[]>(["F", "_", "U", "_", "_", "S"]);
-  const [wrongAttempts, setWrongAttempts] = useState<number>(0);
-  const [fadeOut, setFadeOut] = useState<boolean>(false);
+const GamePage2: React.FC = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialWrongAttempts = Number(searchParams.get("wrongAttempts")) || 0;
 
-  const correctWord = ["F", "R", "U", "I", "T", "S"];
+  const [filledBlanks, setFilledBlanks] = useState(["_", "A", "_"]);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [wrongAttempts, setWrongAttempts] = useState(initialWrongAttempts);
+
+  const correctWord = ["B", "A", "G"];
 
   const handleLetterClick = (letter: string) => {
     const nextIndex = filledBlanks.findIndex(
@@ -26,7 +29,7 @@ const GamePage: React.FC = () => {
 
       if (updated.join("") === correctWord.join("")) {
         setTimeout(() => {
-          router.push(`/fruit-score?wrongAttempts=${wrongAttempts}`);
+          router.push(`/bag-score?wrongAttempts=${wrongAttempts}`);
         }, 1000);
       }
     } else {
@@ -58,11 +61,11 @@ const GamePage: React.FC = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          {/* Fruits Image */}
+          {/* Bag Image */}
           <div className="flex justify-center pt-6">
             <Image
-              src="/assets/fruits.png"
-              alt="fruits"
+              src="/assets/bag.png"
+              alt="bag"
               width={220}
               height={120}
               className="w-[220px] h-auto bg-transparent drop-shadow-[10px_10px_5px_rgba(0,0,0,0.5)]"
@@ -76,7 +79,11 @@ const GamePage: React.FC = () => {
             animate={{ rotate: wrongAttempts > 0 ? [0, -10, 10, -10, 0] : 0 }}
             transition={{ duration: 0.2 }}
           >
-            {wrongAttempts === 0 ? "❤️❤️" : wrongAttempts === 1 ? "❤️💔" : "💔💔"}
+            {wrongAttempts === 0
+              ? "❤️❤️"
+              : wrongAttempts === 1
+              ? "❤️💔"
+              : "💔💔"}
           </motion.div>
 
           {/* Fill-in-the-blanks */}
@@ -93,45 +100,29 @@ const GamePage: React.FC = () => {
 
           {/* Letters (scattered but responsive) */}
           <div className="absolute bottom-8 left-0 w-full h-[180px] pointer-events-none z-20">
-            {/* T */}
+            {/* B */}
             <motion.button
-              onClick={() => handleLetterClick("T")}
+              onClick={() => handleLetterClick("B")}
               className="absolute left-[18%] bottom-[60%] w-[60px] h-[60px] text-2xl font-black bg-[#F9BD20] text-white rounded-[10px] border-[3px] border-white pointer-events-auto"
               whileTap={{ scale: 1.2 }}
             >
-              T
+              B
             </motion.button>
-            {/* I */}
+            {/* A */}
             <motion.button
-              onClick={() => handleLetterClick("I")}
+              onClick={() => handleLetterClick("A")}
               className="absolute left-[65%] bottom-[60%] w-[60px] h-[60px] text-2xl font-black bg-[#F9BD20] text-white rounded-[10px] border-[3px] border-white pointer-events-auto"
               whileTap={{ scale: 1.2 }}
             >
-              I
+              A
             </motion.button>
-            {/* O */}
+            {/* G */}
             <motion.button
-              onClick={() => handleLetterClick("O")}
-              className="absolute left-[8%] bottom-[10%] w-[60px] h-[60px] text-2xl font-black bg-[#F9BD20] text-white rounded-[10px] border-[3px] border-white pointer-events-auto"
-              whileTap={{ scale: 1.2 }}
-            >
-              O
-            </motion.button>
-            {/* K */}
-            <motion.button
-              onClick={() => handleLetterClick("K")}
+              onClick={() => handleLetterClick("G")}
               className="absolute left-[43%] bottom-[20%] w-[60px] h-[60px] text-2xl font-black bg-[#F9BD20] text-white rounded-[10px] border-[3px] border-white pointer-events-auto"
               whileTap={{ scale: 1.2 }}
             >
-              K
-            </motion.button>
-            {/* R */}
-            <motion.button
-              onClick={() => handleLetterClick("R")}
-              className="absolute left-[78%] bottom-[10%] w-[60px] h-[60px] text-2xl font-black bg-[#F9BD20] text-white rounded-[10px] border-[3px] border-white pointer-events-auto"
-              whileTap={{ scale: 1.2 }}
-            >
-              R
+              G
             </motion.button>
           </div>
         </div>
@@ -140,4 +131,4 @@ const GamePage: React.FC = () => {
   );
 };
 
-export default GamePage;
+export default GamePage2;
