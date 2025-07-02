@@ -1,10 +1,20 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 const TryAgainPage: React.FC = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get("from");
+
+  const handleTryAgain = () => {
+    if (from === "game2") {
+      router.push("/game2");
+    } else {
+      router.push("/game");
+    }
+  };
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-white">
@@ -50,7 +60,7 @@ const TryAgainPage: React.FC = () => {
           <button
             className="mt-[-40px] px-10 py-3 text-[22px] font-bold bg-[#ffcc00] border-[4px] border-[#19FC21] rounded-[15px] shadow-lg text-white transition duration-200 hover:bg-[#ffe066] hover:scale-105"
             style={{ boxShadow: "0 4px 0 #19FC21" }}
-            onClick={() => router.push("/")}
+            onClick={handleTryAgain}
           >
             Try Again
           </button>

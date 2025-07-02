@@ -37,7 +37,7 @@ const GamePage2: React.FC = () => {
         const updated = prev + 1;
         if (updated >= 2) {
           setFadeOut(true);
-          setTimeout(() => router.push("/try-again"), 1000);
+          setTimeout(() => router.push("/try-again?from=game2"), 1000);
         }
         return updated;
       });
